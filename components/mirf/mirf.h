@@ -209,7 +209,7 @@ uint8_t   Nrf24_getCRCLength(NRF24_t * dev);
 uint8_t   Nrf24_getPALevel(NRF24_t * dev);
 char *    Nrf24_getPALevelString(NRF24_t * dev);
 uint8_t   Nrf24_getRetransmitDelay(NRF24_t * dev);
-uint8_t   Nrf24_getChannle(NRF24_t * dev);
+uint8_t   Nrf24_getChannel(NRF24_t * dev);
 uint8_t   Nrf24_getPayload(NRF24_t * dev);
 
 #ifdef __cplusplus
