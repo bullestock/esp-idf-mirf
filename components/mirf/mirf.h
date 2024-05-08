@@ -164,15 +164,15 @@ typedef enum {
 
 
 void      Nrf24_init(NRF24_t * dev);
-bool      spi_write_byte(NRF24_t * dev, uint8_t* Dataout, size_t DataLength );
-bool      spi_read_byte(NRF24_t * dev, uint8_t* Datain, uint8_t* Dataout, size_t DataLength );
+bool      spi_write_byte(NRF24_t * dev, const uint8_t* Dataout, size_t DataLength );
+bool      spi_read_byte(NRF24_t * dev, uint8_t* Datain, const uint8_t* Dataout, size_t DataLength );
 uint8_t   spi_transfer(NRF24_t * dev, uint8_t address);
 void      spi_csnLow(NRF24_t * dev);
 void      spi_csnHi(NRF24_t * dev);
 void      Nrf24_config(NRF24_t * dev, uint8_t channel, uint8_t payload);
-void      Nrf24_send(NRF24_t * dev, uint8_t *value);
-esp_err_t Nrf24_setRADDR(NRF24_t * dev, uint8_t * adr);
-esp_err_t Nrf24_setTADDR(NRF24_t * dev, uint8_t * adr);
+void      Nrf24_send(NRF24_t * dev, const uint8_t *value);
+esp_err_t Nrf24_setRADDR(NRF24_t * dev, const uint8_t * adr);
+esp_err_t Nrf24_setTADDR(NRF24_t * dev, const uint8_t * adr);
 void      Nrf24_addRADDR(NRF24_t * dev, uint8_t pipe, uint8_t adr);
 bool      Nrf24_dataReady(NRF24_t * dev);
 uint8_t   Nrf24_getDataPipe(NRF24_t * dev);
@@ -184,7 +184,7 @@ void      Nrf24_getData(NRF24_t * dev, uint8_t * data);
 uint8_t   Nrf24_getStatus(NRF24_t * dev);
 void      Nrf24_configRegister(NRF24_t * dev, uint8_t reg, uint8_t value);
 void      Nrf24_readRegister(NRF24_t * dev, uint8_t reg, uint8_t * value, uint8_t len);
-void      Nrf24_writeRegister(NRF24_t * dev, uint8_t reg, uint8_t * value, uint8_t len);
+void      Nrf24_writeRegister(NRF24_t * dev, uint8_t reg, const uint8_t * value, uint8_t len);
 void      Nrf24_powerUpRx(NRF24_t * dev);
 void      Nrf24_powerUpTx(NRF24_t * dev);
 void      Nrf24_powerDown(NRF24_t * dev);

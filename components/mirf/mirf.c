@@ -85,7 +85,7 @@ void Nrf24_init(NRF24_t * dev)
 }
 
 
-bool spi_write_byte(NRF24_t * dev, uint8_t* Dataout, size_t DataLength )
+bool spi_write_byte(NRF24_t * dev, const uint8_t* Dataout, size_t DataLength )
 {
 	spi_transaction_t SPITransaction;
 
@@ -100,7 +100,7 @@ bool spi_write_byte(NRF24_t * dev, uint8_t* Dataout, size_t DataLength )
 	return true;
 }
 
-bool spi_read_byte(NRF24_t * dev, uint8_t* Datain, uint8_t* Dataout, size_t DataLength )
+bool spi_read_byte(NRF24_t * dev, uint8_t* Datain, const uint8_t* Dataout, size_t DataLength )
 {
 	spi_transaction_t SPITransaction;
 
@@ -147,8 +147,7 @@ void Nrf24_config(NRF24_t * dev, uint8_t channel, uint8_t payload)
 }
 
 // Sets the receiving device address
-//void Nrf24_setRADDR(NRF24_t * dev, uint8_t * adr)
-esp_err_t Nrf24_setRADDR(NRF24_t * dev, uint8_t * adr)
+esp_err_t Nrf24_setRADDR(NRF24_t * dev, const uint8_t * adr)
 {
 	esp_err_t ret = ESP_OK;
 	Nrf24_writeRegister(dev, RX_ADDR_P1, adr, mirf_ADDR_LEN);
@@ -162,8 +161,7 @@ esp_err_t Nrf24_setRADDR(NRF24_t * dev, uint8_t * adr)
 }
 
 // Sets the transmitting device  address
-//void Nrf24_setTADDR(NRF24_t * dev, uint8_t * adr)
-esp_err_t Nrf24_setTADDR(NRF24_t * dev, uint8_t * adr)
+esp_err_t Nrf24_setTADDR(NRF24_t * dev, const uint8_t * adr)
 {
 	esp_err_t ret = ESP_OK;
 	Nrf24_writeRegister(dev, RX_ADDR_P0, adr, mirf_ADDR_LEN); //RX_ADDR_P0 must be set to the sending addr for auto ack to work.
@@ -274,7 +272,7 @@ void Nrf24_readRegister(NRF24_t * dev, uint8_t reg, uint8_t * value, uint8_t len
 }
 
 // Writes an array of bytes into inte the MiRF registers
-void Nrf24_writeRegister(NRF24_t * dev, uint8_t reg, uint8_t * value, uint8_t len)
+void Nrf24_writeRegister(NRF24_t * dev, uint8_t reg, const uint8_t * value, uint8_t len)
 {
 	spi_csnLow(dev);
 	spi_transfer(dev, W_REGISTER | (REGISTER_MASK & reg));
@@ -284,7 +282,7 @@ void Nrf24_writeRegister(NRF24_t * dev, uint8_t reg, uint8_t * value, uint8_t le
 
 // Sends a data package to the default address. Be sure to send the correct
 // amount of bytes as configured as payload on the receiver.
-void Nrf24_send(NRF24_t * dev, uint8_t * value)
+void Nrf24_send(NRF24_t * dev, const uint8_t * value)
 {
 	uint8_t status;
 	status = Nrf24_getStatus(dev);
@@ -502,7 +500,6 @@ void Nrf24_print_address_register(NRF24_t * dev, const char* name, uint8_t reg, 
 {
 	printf("%s\t =",name);
 	while (qty--) {
-		//uint8_t buffer[addr_width];
 		uint8_t buffer[5];
 		Nrf24_readRegister(dev, reg++, buffer, sizeof(buffer));
 
