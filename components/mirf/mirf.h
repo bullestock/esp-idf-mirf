@@ -162,7 +162,12 @@ typedef enum {
     RF24_CRC_16
 } rf24_crclength_e;
 
+#ifdef __cplusplus
 
+extern "C" {
+
+#endif
+    
 void      Nrf24_init(NRF24_t * dev);
 bool      spi_write_byte(NRF24_t * dev, const uint8_t* Dataout, size_t DataLength );
 bool      spi_read_byte(NRF24_t * dev, uint8_t* Datain, const uint8_t* Dataout, size_t DataLength );
@@ -207,5 +212,10 @@ uint8_t   Nrf24_getRetransmitDelay(NRF24_t * dev);
 uint8_t   Nrf24_getChannle(NRF24_t * dev);
 uint8_t   Nrf24_getPayload(NRF24_t * dev);
 
-#endif /* MAIN_MIRF_H_ */
+#ifdef __cplusplus
 
+} // extern "C"
+
+#endif
+
+#endif /* MAIN_MIRF_H_ */
